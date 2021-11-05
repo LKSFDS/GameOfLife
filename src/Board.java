@@ -13,15 +13,6 @@ public class Board {
         this.board = initRandom();
     }
 
-    public void initZeros(){
-        if(this.board != null){
-            for(int[] row: this.board){
-                for(int cell: row){
-                    cell = 0;
-                }
-            }
-        }
-    }
 
     public int[][] initRandom(){
         int[][] matriz = new int[this.board.length][this.board.length];
@@ -44,9 +35,6 @@ public class Board {
         return this.board.length;
     }
 
-    public int getCell(int n, int m){
-        return this.board[n][m];
-    }
 
     public void killCell(int n, int m){
         this.board[n][m] = 0;
@@ -67,15 +55,6 @@ public class Board {
         System.out.println("");
     }
 
-    public void invert(){
-        for(int i = 0; i < this.board.length; i ++){
-            for(int j = 0; j < this.board.length; j++){
-                if(this.isAlive(i, j)) killCell(i,j);
-                else ressurrectCell(i,j);
-            }
-        }
-    }
-
     public int[][] getBoard() {
         return board;
     }
@@ -84,11 +63,4 @@ public class Board {
         this.board = board;
     }
 
-    public static void main(String[] args) {
-        Board board = new Board(5);
-        board.setBoardRandom();
-        board.printBoard();
-        board.invert();
-        board.printBoard();
-    }
 }

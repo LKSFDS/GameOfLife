@@ -42,6 +42,7 @@ public class PlayGOLMono {
     }
 
     public static void main(String[] args) {
+
         int mSize, numGen, nThread, opcao;
 
         try {
@@ -59,14 +60,12 @@ public class PlayGOLMono {
             System.out.println("Informe o numero de Threads: ");
             nThread = Integer.parseInt(input.nextLine());
 
-
-
             PlayGOLMono playGOL = new PlayGOLMono(mSize, nThread, opcao);
             /*System.out.println("Tabuleiro inicial (Gen = 0)");
             playGOL.gameOfLife.getBoardRead().printBoard();*/
-            //long start = System.currentTimeMillis();
+            long start = System.currentTimeMillis();
             for(int i = 0; i < numGen; i++) {
-                /*int cont = 0;
+                int cont = 0;
                 for(int l = 0; l<mSize ; l++){
                     for(int m = 0; m<mSize; m++){
                         if(playGOL.gameOfLife.getBoardRead().isAlive(l, m)){
@@ -74,8 +73,8 @@ public class PlayGOLMono {
                         }
                     }
                 }
-                System.out.println("O número de células vivas no final é: "+cont);
-                long start = System.currentTimeMillis();*/
+                //System.out.println("O número de células vivas no final é: "+cont);
+                //long start = System.currentTimeMillis();
                 for(int k = 0; k < nThread; k++) {
                     playGOL.gameThread[k] = new Thread(playGOL.runGame[k]);
                     //playGOL.gameThread[k].start();
@@ -89,14 +88,14 @@ public class PlayGOLMono {
                     playGOL.gameThread[j].join();
                 }
 
-                //System.out.println("Geracao: "+(i+1));
+               //2 System.out.println("Geracao: "+(i+1));
                 //playGOL.gameOfLife.getBoardWrite().printBoard();
                 playGOL.gameOfLife.setupForNextGeneration();
-                //long end = System.currentTimeMillis();
-                //System.out.println("Duracao: " + (end-start) + " milissegundos.");
+                /*long end = System.currentTimeMillis();
+                System.out.println("Duracao: " + (end-start) + " milissegundos.");*/
             }
-           // long end = System.currentTimeMillis();
-           // System.out.println("Duracao: " + (end-start) + " milissegundos.");
+            long end = System.currentTimeMillis();
+            System.out.println("Duracao: " + (end-start) + " milissegundos.");
             int cont = 0;
             for(int i = 0; i<mSize ; i++){
                 for(int j = 0; j<mSize; j++){
@@ -105,13 +104,15 @@ public class PlayGOLMono {
                     }
                 }
             }
-            System.out.println("O número de células vivas no final é: "+cont);
+            //System.out.println("O número de células vivas no final é: "+cont);
         }
+
         catch(IOException e){
             System.out.println("Valor de vertice invalido.");
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 }
